@@ -7,7 +7,7 @@ class Example {
   ros::Subscriber imageSub;
 public:
   Example() {
-    imageSub = n.subscribe("/drone_camera_264_main/image_raw", 1, &Example::imageCallback, this);
+    imageSub = n.subscribe("/drone_camera_264_main/image_raw", 5, &Example::imageCallback, this);
   }
 
   void imageCallback(const sensor_msgs::ImageConstPtr &msg) {
@@ -21,7 +21,8 @@ public:
 int main(int argc, char **argv) {
   ros::init(argc, argv, "example");
 
-  ros::AsyncSpinner spinner(0);
+  ros::AsyncSpinner spinner(1);
+  spinner.start();
   Example e;
   ros::waitForShutdown();
 
